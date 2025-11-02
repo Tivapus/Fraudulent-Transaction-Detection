@@ -3,8 +3,7 @@ __pycache__/
 *.pyc
 
 # Data (must download manually)
-data/
-data.csv
+data/fraud_mock.csv
 
 # Generated database file
 *.db
