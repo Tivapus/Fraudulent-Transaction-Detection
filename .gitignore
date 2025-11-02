@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Data (must download manually)
+data/
+data.csv
+
+# Generated database file
+*.db
+
+# api_test
+api_test.py
