@@ -9,7 +9,7 @@ from model_feature_engineer import AccountFeatureEngineer
 
 
 # Model Loading
-MODEL_FILE = 'model/fraud_model.joblib'
+MODEL_FILE = 'models/fraud_model.joblib'
 model_pipeline = None
 try:
     model_pipeline = joblib.load(MODEL_FILE)
