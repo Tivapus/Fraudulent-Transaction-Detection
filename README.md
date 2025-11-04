@@ -8,6 +8,7 @@ This repository demonstrates an **end-to-end fraud detection pipeline**:
 3. REST API for Fraud Prediction
 4. Database Integration (SQLite)
 5. System Architecture Design
+6. Model Reproducibility
 
 ---
 
@@ -43,22 +44,22 @@ git clone https://github.com/Tivapus/Fraudulent-Transaction-Detection.git
 cd Fraudulent-Transaction-Detection
 ```
 
-#### Step 2. Create and activate a virtual environtment
-1. สร้าง virtual environment แล้ว activate:
-```bash
-python -m venv venv
-# mac/linux:
-source venv/bin/activate
-# windows (powershell)
-venv\Scripts\activate
-```
+#### Step 2. Select Python Interpreter
+1. Crtl + shift + p 
+2. select Python: Select Interpreter
+
 #### Step 3. Install dependencies
 ```bash
 pip install -r requirement.txt
 ```
-
 `requirement.txt` ใน repo ระบุ (โดยย่อ):  
 `pandas, numpy, matplotlib, seaborn, joblib, scikit-learn, xgboost, torch, fastapi, uvicorn, pydantic, databases, SQLAlchemy`
+
+### 2. Setup Database
+```bash
+python database.py
+```
+After command you need to see fraud_cases.db
 
 ---
 
