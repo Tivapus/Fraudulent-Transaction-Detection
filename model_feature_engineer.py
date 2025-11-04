@@ -13,6 +13,6 @@ class AccountFeatureEngineer(BaseEstimator, TransformerMixin):
         X['hour_of_day'] = X['time_ind'] % 24
         X['day'] = X['time_ind']//24
 
-        X['src_ratio'] = (X['src_new_bal'] - X['src_bal']) / (X['src_bal'] + 1)
-        X['dst_ratio'] = (X['dst_new_bal'] - X['dst_bal']) / (X['dst_bal'] + 1)
+        X['src_ratio'] = X['amount'] / (X['src_bal'] + 1)
+        X['dst_ratio'] = X['amount'] / (X['dst_bal'] + 1)
         return X
