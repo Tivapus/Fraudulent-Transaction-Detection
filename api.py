@@ -32,10 +32,11 @@ async def predict_fraud(transaction: Transaction):
         result = int(prediction[0])
 
         if result == 1:
+            data_dict['is_predicted_fraud']=result
             query = fraudulent_transactions.insert().values(**data_dict)
             await database.execute(query)
 
-        return {"is_fraud": result}
+        return {"is_predicted_fraud": result}
 
     except Exception as e:
         print(f"Error during prediction: {e}")

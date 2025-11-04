@@ -19,6 +19,7 @@ fraudulent_transactions = sqlalchemy.Table(
     sqlalchemy.Column("dst_bal", sqlalchemy.Float),
     sqlalchemy.Column("dst_new_bal", sqlalchemy.Float),
     sqlalchemy.Column("is_flagged_fraud", sqlalchemy.Integer),
+    sqlalchemy.Column("is_predicted_fraud",sqlalchemy.Integer)
 )
 
 engine = sqlalchemy.create_engine(DATABASE_URL)

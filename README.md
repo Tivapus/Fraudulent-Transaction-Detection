@@ -61,6 +61,9 @@ python database.py
 ```
 After command you need to see fraud_cases.db
 
+### 3. Download fraud_mock.csv (Optional: If you want to run notebook again)
+https://scbpocseasta001stdsbx.z23.web.core.windows.net/
+
 ---
 
 ## 🧠 1. Exploratory Data Analysis (EDA)
@@ -83,28 +86,33 @@ Exploration includes:
 ---
 ## 🤖 2. Model Training & Evaluation
 📓 Notebook: notebooks/02_model.ipynb
+### **Data split**: 70% training, 30% testing (by time_ind)
+### **Model**: XGBoostClassifier
 
 ### 🧩 Feature Engineering
 
 **Selected safe features (no leakage)**: [
- 'transac_type_CASH_IN', 'transac_type_CASH_OUT',
- 'transac_type_DEBIT', 'transac_type_PAYMENT',
- 'transac_type_TRANSFER',
- 'src_bal', 'dst_bal',
- 'src_ratio', 'dst_ratio',
- 'hour_of_day', 'day'
+    'transac_type_CASH_IN',
+    'transac_type_CASH_OUT',
+    'transac_type_DEBIT', 
+    'transac_type_PAYMENT',
+    'transac_type_TRANSFER',
+    'src_bal', 
+    'dst_bal',
+    'src_ratio', 
+    'dst_ratio',
+    'hour_of_day', 
+    'day'
 ]
 
 **Feature definitions**:
-df['src_ratio'] = np.where(df['src_bal'] > 0, np.log1p(df['amount'] / df['src_bal']), 0)
-df['dst_ratio'] = np.where(df['dst_bal'] > 0, np.log1p(df['amount'] / df['dst_bal']), 0)
-df['hour_of_day'] = df['time_ind'] % 24
-df['day'] = df['time_ind'] // 24
-
-### **Model**: XGBoostClassifier
-### **Data split**: 70% training, 30% testing (by time_ind)
+1. df['src_ratio'] = np.where(df['src_bal'] > 0, np.log1p(df['amount'] / df['src_bal']), 0)
+2. df['dst_ratio'] = np.where(df['dst_bal'] > 0, np.log1p(df['amount'] / df['dst_bal']), 0)
+3. df['hour_of_day'] = df['time_ind'] % 24
+4. df['day'] = df['time_ind'] // 24
 
 ---
+
 ## 🌐 3. REST API Service
 📂 src/app.py
 
@@ -141,7 +149,7 @@ python api.py
 - Response (ตัวอย่าง): 
     ```json
     {
-        "is_fraud": result
+        "is_predicted_fraud": result
     }
     ```
 If the prediction is 1, the transaction is automatically stored in the SQLite database.
@@ -150,27 +158,27 @@ If the prediction is 1, the transaction is automatically stored in the SQLite da
 Retrieves all transactions previously predicted as fraudulent.
 
 Response Example
-    ```
-    [
-    {
-        "id": 1,
-        "time_ind": 100,
-        "transac_type": "TRANSFER",
-        "amount": 200000.0,
-        "src_acc": "C98765",
-        "dst_acc": "M12345",
-        "is_flagged_fraud": 0
-    }
-    ]
-    ```
+```json
+[
+{
+    "id": 1,
+    "time_ind": 100,
+    "transac_type": "TRANSFER",
+    "amount": 200000.0,
+    "src_acc": "C98765",
+    "dst_acc": "M12345",
+    "is_flagged_fraud": 0
+}
+]
+```
 
 ### GET / (root)
 Simple health check endpoint.
 
 Response Example 
-    ``` 
-    {"message": "Fraud Detection API is running. Go to /docs for Swagger UI."}
-    ```
+``` json
+{"message": "Fraud Detection API is running. Go to /docs for Swagger UI."}
+```
 
 ---
 ## 🧾 4. Database
