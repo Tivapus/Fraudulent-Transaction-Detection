@@ -211,7 +211,7 @@ python database.py
 ---
 
 ## 🏗️ 5. System Architecture
-
+![System Architecture](architecture/diagram.png)
 
 ---
 
