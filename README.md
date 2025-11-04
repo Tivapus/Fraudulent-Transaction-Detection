@@ -64,6 +64,8 @@ After command you need to see fraud_cases.db
 ### 3. Download fraud_mock.csv (Optional: If you want to run notebook again)
 https://scbpocseasta001stdsbx.z23.web.core.windows.net/
 
+add to floder /data
+
 ---
 
 ## 🧠 1. Exploratory Data Analysis (EDA)
@@ -167,7 +169,8 @@ Response Example
     "amount": 200000.0,
     "src_acc": "C98765",
     "dst_acc": "M12345",
-    "is_flagged_fraud": 0
+    "is_flagged_fraud": 0,
+    "is_predicted_fraud": 1
 }
 ]
 ```
@@ -190,15 +193,19 @@ Run for Create Database
 python database.py
 ```
 
-| Column         | Type  | Description                   |
-| -------------- | ----- | ----------------------------- |
-| id             | int   | Primary key                   |
-| transaction_id | text  | Unique transaction identifier |
-| timestamp      | text  | Transaction time              |
-| transac_type   | text  | Transaction type              |
-| amount         | float | Transaction amount            |
-| fraud_prob     | float | Model confidence              |
-| is_fraud       | bool  | Model prediction              |
+| Column             | Type  | Description                               |
+| ------------------ | ----- | ----------------------------------------- |
+| id                 | text  | Unique transaction identifier             |
+| time_ind           | text  | Transaction time                          |
+| transac_type       | text  | Transaction type                          |
+| amount             | float | Transaction amount                        |
+| src_acc            | text  | Customer initiating the transaction       |
+| dst_acc            | text  | Transaction recipient                     |
+| src_bal            | float | Initial balance (sender)                  |
+| src_new_bal        | float | New balance (sender)                      |
+| dst_new_bal        | float | New balance (recipient)                   |
+| is_flagged_fraud   |  int  | Transactions flagged for illegal attempts |
+| is_predicted_fraud |  int  | Transactions predicted from model         |
 
 
 ---
@@ -214,11 +221,11 @@ python database.py
 1. Go to notebook/01_EDA.ipynb
 2. Select the python interpreter
 3. Install dependencies
-4. Run each cells
+4. Run each cells follow the step upper to below
 
 # Model training
 1. Go to notebook/02_model.ipynb
 2. Select the python interpreter
 3. Install dependencies
-4. Run each cells
+4. Run each cells follow the step upper to below
 ```
