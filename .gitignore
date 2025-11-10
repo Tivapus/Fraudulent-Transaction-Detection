@@ -7,6 +7,3 @@ data/fraud_mock.csv
 
 # Generated database file
 *.db
-
-# api_test
-api_test.py
